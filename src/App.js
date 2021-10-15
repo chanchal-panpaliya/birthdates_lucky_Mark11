@@ -1,16 +1,10 @@
 import './App.css';
 import { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 
-import  Facebook  from '@material-ui/icons/Facebook';
-import  Twitter  from '@material-ui/icons/Twitter';
-import  LinkedIn  from '@material-ui/icons/LinkedIn';
-import  GitHub  from '@material-ui/icons/GitHub';
+import FacebookIcon from './img/icons/facebook.png';
+import TwitterIcon from './img/icons/twitter.png';
+import LinkedInIcon from './img/icons/linkedin.png';
+import GithubIcon from './img/icons/github.png'; 
 
 import luck from './img/luck.jpg';
 import unhappy from './img/unhappy1.png';
@@ -67,63 +61,54 @@ class App extends Component {
             this.setState({openDialogbox_NotLucky:true})
          }
     }else{
-      console.log("value gretter then 0")
+      // console.log("value gretter then 0")
     }
   }
 
 
-   DialogBoxNotrender=()=>{
+  DialogBoxNotrender=()=>{
     return(
-      <Dialog
-      open={this.state.openDialogbox_NotLucky}
-      onClose={this.handleCloseDialogBox}
-      aria-labelledby="responsive-dialog-title"
-    >
-      {/* <DialogTitle id="responsive-dialog-title"> {this.state.luckynumber} is not a Lucky Number </DialogTitle> */}
-      <DialogContent>
-        <DialogContentText>
-        <div className="diloagbox-luck-not-container"> a Lucky Number </div>
-           <img src={unhappy} alt="lucky not number" style={{width:'20%',height:'20%'}}/> 
+      this.state.openDialogbox_NotLucky ? 
+      <div> 
+      <dialog className="myFirstDialog" style={{width:'40%',height:'40%',backgroundColor:'white',border:'0px solid black',zIndex:'2',top:'20%'}} open>
+  
+        <div className="diloagbox-luck-not-container"> Lucky Number </div>
+           <img src={unhappy} alt="lucky not number" style={{width:'60%',height:'80%',paddingLeft:'7%',paddingTop:'5%'}}/> 
            
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={this.handleCloseDialogBox} color="primary" autoFocus>
+           <br/>
+        <button className="button1" onClick={this.handleCloseDialogBox} style={{backgroundColor:'grey',bottom:'0%'}}>
           Agree
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </button>
+  
+    </dialog>
+    </div> : null
+      
     )
   } 
 
 
-   DialogBoxLuckyNumberrender=()=>{
+  DialogBoxLuckyNumberrender=()=>{
     return(
-      <Dialog
-      open={this.state.openDialogbox_Lucky}
-      onClose={this.handleCloseDialogBox}
-      aria-labelledby="responsive-dialog-title"
-    >
-      {/* <DialogTitle id="responsive-dialog-title">{this.state.luckynumber} is a Lucky Number </DialogTitle> */}
-      <DialogContent>
-        <DialogContentText>
-            <div className="diloagbox-luck-container">
-                {this.state.luckynumber}
-            </div>
+      this.state.openDialogbox_Lucky ? 
+      <div>
+      <dialog className="myFirstDialog" style={{width:'40%',height:'40%',backgroundColor:'white',border:'0px solid black',zIndex:'2',top:'20%'}}  open>
+       <br/>
+        <div className="diloagbox-luck-container">
+              {this.state.luckynumber}
+        </div>
             
-               <img src={luck} alt="lucky number"/>
+              <img src={luck} alt="lucky number" style={{width:'80%',height:'80%'}}/>
             
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={this.handleCloseDialogBox} color="primary" autoFocus>
+           
+        <br/><br/>
+        <button id="hide" onClick={this.handleCloseDialogBox} style={{backgroundColor:'grey',bottom:'0%'}}>
           Agree
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </button>
+  
+    </dialog> </div>: null
+      
     )
-  }
-
+  } 
 
   HOMErender(){
 
@@ -134,32 +119,24 @@ class App extends Component {
             Is your Birthday Lucky? 🤔
         </div>
 
-        <form  noValidate>
 
         <div className="birthdaylucky-DOBText">
-            <TextField id="date" label="Birthday"  variant="filled" value={this.state.DOB} type="date" onChange={this.onhandle_getBirthdate}
-                InputLabelProps={{
-                  shrink: true,
-                }} style={{width:'20%'}}/>
+            <input id="date"  value={this.state.DOB} type="date" onChange={this.onhandle_getBirthdate} style={{width:'20%',height:'5vh'}}/>
          </div>
 
         <div className="birthdaylucky-LukText">
-          <TextField id="standard-number"  variant="filled" label="Enter your lucky number"  value={this.state.luckynumber} onChange={this.onhandle_getLuckyNumber}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            style={{width:'20%'}}
-            error={this.state.luckynumber < 0} helperText={ this.state.luckynumber < 0 ? 'greater then 0 ' : '' }
-          />
+          <input id="standard-number"   placeholder="Enter your lucky number"  value={this.state.luckynumber} onChange={this.onhandle_getLuckyNumber} style={{width:'20%',height:'5vh'}}/>
+              <br/>
+                   {this.state.luckynumber < 0 ? <small style={{color:'red'}}>greater then 0 </small> : ""}
         </div>
 
         
         <div className="birthdaylucky-button">
           {this.state.DOB && this.state.luckynumber>0 ? 
-          <Button variant="outlined" style={{backgroundColor:'rgba(255, 0, 0, 0.5)',color:'white'}} onClick={this.CalculateLuckyNumber}> Check Number </Button> :
+          <button type="submit" className="button1" style={{color:'black',width:'20%',height:'5vh',border:'2px solid rgba(255, 0, 0, 0.5)'}} onClick={this.CalculateLuckyNumber}> Check Number </button> :
           <div> Enter DOB and your lucky number and check entered number is <b>lucky</b> or <b>not</b>. </div>}
         </div>
-       </form>
+     
        <div className="body-privacy-text"> <b>Privacy Notice</b>:  Not storing data </div>
       </div>
     );
@@ -176,22 +153,22 @@ class App extends Component {
           <div className="menu__socialItems">
                   <a className="menu__socialLink" target="_blank" href='https://www.facebook.com/chanchal.panpaliya'> 
                     <span className="menu__socialIcon">
-                      <Facebook  style={{color:'grey'}}/>
+                      <img style={{width:'8%',paddingTop:'2%'}} src={FacebookIcon} alt="facebooklink"/>
                     </span>
                   </a> <br/><br/>
                   <a className="menu__socialLink" target="_blank" href='https://twitter.com/CPanpaliya'> 
                      <span className="menu__socialIcon">
-                        <Twitter style={{color:'grey'}}/>
+                        <img style={{width:'8%',paddingTop:'2%'}} src={TwitterIcon} alt="twitterlink"/>
                      </span>
                   </a><br/><br/>
                   <a className="menu__socialLink" target="_blank" href='https://www.linkedin.com/in/chanchal-panpaliya-0b0436112'> 
                     <span className="menu__socialIcon">
-                      <LinkedIn style={{color:'grey'}}/> 
+                       <img style={{width:'8%',paddingTop:'2%'}} src={LinkedInIcon} alt="linkedinlink"/>
                       </span>
                   </a> <br/><br/>
                   <a className="menu__socialLink" target="_blank" href='https://github.com/chanchal-panpaliya'> 
                     <span className="menu__socialIcon">
-                      <GitHub style={{color:'grey'}}/>
+                      <img style={{width:'8%',paddingTop:'2%'}} src={GithubIcon} alt="githublink"/>
                     </span>
                 </a>
               </div>

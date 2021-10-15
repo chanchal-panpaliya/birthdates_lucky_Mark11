@@ -149,17 +149,17 @@ css
 
 .diloagbox-luck-container{
   position: absolute;
-  font-size: 5rem;
-  padding-top: 15%;
-  padding-left: 7%;
-  color: white;
+  font-size: 7rem;
+  padding-top: 5%;
+  padding-left: 15%;
+  color: rgb(233, 216, 216);
 }
 
 .diloagbox-luck-not-container{
   position: absolute;
   font-size: 3rem;
-  padding-top: 4%;
-  padding-left: 23%;
+  padding-top: 15%;
+  padding-left: 25%;
   font-weight: 700;
   color: rgb(10, 4, 4);
 }
@@ -167,4 +167,13 @@ css
 .body-privacy-text{
   padding-top: 12%;
   color: rgba(255, 0, 0, 1);
+}
+
+.button1:hover{
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.myFirstDialog{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
 }
